@@ -10,14 +10,11 @@ Running data will be brought in via the Strava API which gathers different data 
 * Elevation
 * Location
 
-Weather data will be accessed via {{determine_later}} {{API or CSV}} to gather past weather data for past runs such as:
+Weather data will be accessed via NOAA API to gather past weather data for past runs such as:
 
 * Temperature
 * Humidity
 * Percipitation
 * Dewpoint
-
-
-
 
 Data Analysis 2 Final Project - Code Kentucky
