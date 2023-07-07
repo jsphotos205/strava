@@ -1,8 +1,6 @@
 # RRGCC Running
 
-### "Locals Running Locally"
-
-The finished project will allow users to submit and upload Strava run/hike data for Red River Climbers Colition owned land in Lee County, Kentucky such as MFRP (Miller Fork Recreation Preserve) and PMRP (Pendergrass Murphy Recreation Preserve). 
+The finished project will allow users to submit and upload Strava run/hike data for Red River Climbers Colition owned land in Lee County, Kentucky such as MFRP (Miller Fork Recreation Preserve) and PMRP (Pendergrass Murphy Recreation Preserve).
 
 This application will run comparative data analysis between individuals' running data with regards to past historical weather data and be presented in a dashboard to show leaderboards for times.
 
