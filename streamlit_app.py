@@ -11,7 +11,7 @@ def main():
 
     st.title('RRGCC Running Data')
 
-    data_dir = 'csv/run/rrgcc_loops'
+    data_dir = 'csv/run/rrgcc/rrgcc_loops/'
 
     csv_files = [f for f in os.listdir(data_dir) if f.endswith('.csv')]
     selected_file = st.selectbox('Select:', csv_files, index=0)
@@ -28,7 +28,7 @@ def main():
 
     st.title('Folium Map Viewer')
 
-    map_dir = 'csv/maps/'
+    map_dir = 'maps/'
 
     map_files = [f for f in os.listdir(map_dir) if f.endswith('html')]
 
