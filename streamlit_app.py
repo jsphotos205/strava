@@ -52,12 +52,15 @@ def main():
     header_path = 'images/rrgcc.png'
     st.image(header_path, use_column_width=True, width=100)
 
-    st.title('Running Data')
+    st.title(':red[Running] and :blue[Weather] Data Analysis')
+    
 
     data_dir = 'csv/run/rrgcc'
 
     csv_files = [f for f in os.listdir(data_dir) if f.endswith('.csv')]
-    selected_file = st.selectbox('Select Runs:', csv_files, index=0)
+    selected_file = st.selectbox('Select Run(s):', csv_files, index=0)
+
+    selected_run_name = None
 
     if selected_file:
 
@@ -79,15 +82,14 @@ def main():
         st.dataframe(run_data_styled)
         st.caption(f'Max values of {selected_file} highlighted')
 
-    st.title('RRGCC Run Viewer')
+    st.title(f'{selected_file} Map:')
 
     map_dir = 'maps/'
 
-    map_files = [f for f in os.listdir(map_dir) if f.endswith('.html')]
+    map_files = [f for f in os.listdir(map_dir) if f.startswith(selected_file) and f.endswith('.html')]
 
-    selected_map = st.selectbox('Select a Map:', map_files, index=0)
-
-    if selected_map:
+    if map_files:
+        selected_map = map_files[0]
         map_path = os.path.join(map_dir, selected_map)
 
         with open(map_path, 'r') as f:

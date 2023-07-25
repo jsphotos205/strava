@@ -3,13 +3,13 @@ import folium
 from ast import literal_eval
 import os
 
-pmrp_run = pd.read_csv('csv/run/rrgcc/rrgcc_combined_loops/pmrp_run_data.csv')
-lode_loop = pd.read_csv('csv/run/rrgcc/rrgcc_combined_loops/lode_loop_data.csv')
-only_lode_loop = pd.read_csv('csv/run/rrgcc/rrgcc_loops/only_lode_loop.csv')
-sore_heel_loop = pd.read_csv('csv/run/rrgcc/rrgcc_combined_loops/sore_heel_data.csv')
-only_sore_heel_loop = pd.read_csv('csv/run/rrgcc/rrgcc_loops/only_sore_heel_loop.csv')
-drive_by_loop = pd.read_csv('csv/run/rrgcc/rrgcc_combined_loops/drive_by_data.csv')
-only_drive_by_loop = pd.read_csv('csv/run/rrgcc/rrgcc_loops/only_drive_by_loop.csv')
+all_pmrp = pd.read_csv('csv/run/rrgcc/all_pmrp.csv')
+all_lode = pd.read_csv('csv/run/rrgcc/all_lode.csv')
+only_lode = pd.read_csv('csv/run/rrgcc/only_lode.csv')
+all_sore_heel = pd.read_csv('csv/run/rrgcc/all_sore_heel.csv')
+only_sore_heel = pd.read_csv('csv/run/rrgcc/only_sore_heel.csv')
+all_drive_by = pd.read_csv('csv/run/rrgcc/all_drive_by.csv')
+only_drive_by = pd.read_csv('csv/run/rrgcc/only_drive_by.csv')
 
 def PMRP_Map(df, map_name):
 
@@ -50,10 +50,10 @@ def PMRP_Map(df, map_name):
         
     return(m)
 
-PMRP_Map(pmrp_run, 'all_pmrp')
-PMRP_Map(lode_loop, 'all_lode_loops')
-PMRP_Map(only_lode_loop, 'only_lode_loop')
-PMRP_Map(sore_heel_loop, 'all_sore_heel_loops')
-PMRP_Map(only_sore_heel_loop, 'only_sore_heel_loop')
-PMRP_Map(drive_by_loop, 'all_drive_by_loops')
-PMRP_Map(only_drive_by_loop, 'only_drive_by_loop')
+PMRP_Map(all_pmrp, 'all_pmrp')
+PMRP_Map(all_lode, 'all_lode')
+PMRP_Map(only_lode, 'only_lode')
+PMRP_Map(all_sore_heel, 'all_sore_heel')
+PMRP_Map(only_sore_heel, 'only_sore_heel')
+PMRP_Map(all_drive_by, 'all_drive_by')
+PMRP_Map(only_drive_by, 'only_drive_by')
