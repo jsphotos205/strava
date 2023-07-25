@@ -19,8 +19,8 @@ def reorder_columns(df):
                     'elev_low',
                     'pr_count',
                     'tavg',
-                    'tmin',
                     'tmax',
+                    'tmin',
                     'prcp',
                     'snow',
                     'wdir',
@@ -28,31 +28,62 @@ def reorder_columns(df):
                     'pres']
     return df[column_order]
 
+def highlight_max_values(val, df):
+    max_distance = val == df['distance_miles'].max()
+    max_speed = val == df['max_speed'].max()
+    max_avg_speed = val == df['average_speed'].max()
+    max_tmax = val == df['tmax'].max()
+    max_tmin = val == df['tmin'].max()
+    max_prcp = val == df['prcp'].max()
+
+    background_color = 'background-color : red'
+
+    max_distance_style = f'{background_color}' if max_distance else ''
+    max_speed_style = f'{background_color}' if max_speed else ''
+    max_avg_speed_style = f'{background_color}' if max_avg_speed else ''
+    max_tmax_style =f'{background_color}' if max_tmax else ''
+    max_tmin_style = f'{background_color}' if max_tmin else ''
+    max_prcp_style = f'{background_color}' if max_prcp else ''
+
+    return f'{max_distance_style}; {max_speed_style}; {max_avg_speed_style}; {max_tmax_style}; {max_tmin_style} {max_prcp_style}'
+
 def main():
 
-    st.title('RRGCC Running Data')
+    header_path = 'images/rrgcc.png'
+    st.image(header_path, use_column_width=True, width=100)
 
-    data_dir = 'csv/run/rrgcc/rrgcc_loops/'
+    st.title('Running Data')
+
+    data_dir = 'csv/run/rrgcc'
 
     csv_files = [f for f in os.listdir(data_dir) if f.endswith('.csv')]
-    selected_file = st.selectbox('Select:', csv_files, index=0)
+    selected_file = st.selectbox('Select Runs:', csv_files, index=0)
 
     if selected_file:
+
         file_path = os.path.join(data_dir, selected_file)
+        selected_file = selected_file.rstrip('.csv')
         run_data = load_data(file_path)
         run_data = reorder_columns(df=run_data)
+        run_data_styled = run_data.style.applymap(highlight_max_values, subset=['distance_miles', 'max_speed', 'average_speed', 'tmax', 'prcp'], df=run_data)
 
-        st.subheader('List of Runs:')
-        # run_data = reorder_columns(run_data)
+        st.subheader(f'{selected_file}:')
         st.dataframe(run_data)
+        st.caption(f'Combined run/weather data for {selected_file} runs.')
+
+        st.subheader(f'Describe {selected_file}:')
         st.write(run_data.describe())
-        st.caption('Combined run/weather data for RRGCC runs')
+        st.caption('Run Data Description')
+
+        st.subheader(f'Max values:')
+        st.dataframe(run_data_styled)
+        st.caption(f'Max values of {selected_file} highlighted')
 
     st.title('RRGCC Run Viewer')
 
     map_dir = 'maps/'
 
-    map_files = [f for f in os.listdir(map_dir) if f.endswith('html')]
+    map_files = [f for f in os.listdir(map_dir) if f.endswith('.html')]
 
     selected_map = st.selectbox('Select a Map:', map_files, index=0)
 
