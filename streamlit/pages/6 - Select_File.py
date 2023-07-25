@@ -1,9 +1,8 @@
 import streamlit as st
 import pandas as pd
 import os
-import seaborn as sns
+import numpy as np
 
-@st.cache_data
 def load_data(file_path):
     df = pd.read_csv(file_path)
     return df
@@ -104,12 +103,6 @@ def highlight_min_values(val, df):
 
 def main():
 
-    header_path = 'images/rrgcc.png'
-    st.image(header_path, use_column_width=True, width=100)
-
-    st.title(':red[Running] and :blue[Weather] Data Analysis')
-    
-
     data_dir = 'csv/run/rrgcc'
 
     csv_files = [f for f in os.listdir(data_dir) if f.endswith('.csv')]
@@ -171,7 +164,7 @@ def main():
             map_html = f.read()
 
         st.components.v1.html(map_html, width=800, height=400)
-    
+
 
 if __name__ == '__main__':
     main()
