@@ -2,9 +2,10 @@ import streamlit as st
 from Home import *
 
 def main():
-    
     st.set_page_config(page_title='RRGCC Running and Weather Data',
-                       page_icon= ':runner:')
+                       page_icon= ':runner:',
+                       layout='wide',
+                       initial_sidebar_state='expanded')
     
     rrgcc_content = load_markdown_file('streamlit/pages/md/RRGCC_Land.md')
 

@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import os
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 from Home import *
 
 @st.cache_data
@@ -105,14 +107,15 @@ def highlight_min_values(val, df):
 
 
 def main():
-    
     st.set_page_config(page_title='RRGCC Running and Weather Data',
-                       page_icon= ':runner:')
+                       page_icon= ':runner:',
+                       layout='wide',
+                       initial_sidebar_state='expanded')
 
     data_dir = 'csv/run/rrgcc'
 
     csv_files = [f for f in os.listdir(data_dir) if f.endswith('.csv')]
-    selected_file = st.selectbox('Select Loop(s):', csv_files, index=0)
+    selected_file = st.selectbox(':runner: Select Run Data:', csv_files, index=0)
 
     selected_run_name = None
 
@@ -134,33 +137,54 @@ def main():
                   'pres']
 
         file_path = os.path.join(data_dir, selected_file)
-        selected_file = selected_file.rstrip('.csv')
+        selected_file_name = selected_file.rstrip('.csv')
         run_data = load_data(file_path)
         run_data = reorder_columns(df=run_data)
         run_data_max = run_data.style.applymap(highlight_max_values, subset=subset, df=run_data)
         run_data_min = run_data.style.applymap(highlight_min_values, subset=subset, df=run_data)
 
-        st.subheader(f'{selected_file}:')
-        st.dataframe(run_data)
-        st.caption(f'Combined run/weather data for {selected_file} runs.')
 
-        st.subheader(f'Describe {selected_file}:')
+        st.subheader(f'{selected_file_name}:')
+        st.dataframe(run_data)
+        st.caption(f'Combined run/weather data for {selected_file_name} runs.')
+
+        st.subheader(f'Describe {selected_file_name}:')
         st.write(run_data.describe())
         st.caption('Run Data Description')
 
         st.subheader(f'Max values:')
         st.dataframe(run_data_max)
-        st.caption(f'Max values of {selected_file} highlighted in red')
+        st.caption(f'Max values of {selected_file_name} highlighted in red')
 
         st.subheader(f'Min values:')
         st.dataframe(run_data_min)
-        st.caption(f'Min values of {selected_file} highlighted in blue')
+        st.caption(f'Min values of {selected_file_name} highlighted in blue')
 
-    st.title(f'{selected_file} Map:')
+        st.title(f'{selected_file_name} Graph:')
+
+        fig, ax = plt.subplots()
+        ax.scatter(x='distance_miles', y='moving_time_minutes', hue='tavg', data=run_data)
+        plt.xlabel('Distance (miles)')
+        plt.ylabel('Moving Time (minutes)')
+        plt.title('Scatter Plot : Distance vs. Moving Time')
+        plt.legend(title='Temperature (tavg)')
+        st.pyplot()
+
+        sns.barplot(x='start_date', y='distance_miles', hue='tavg', data=run_data)
+        plt.xlabel('Time')
+        plt.ylabel('Distance (miles)')
+        plt.title('Line Chart : Distance vs Time with Temperature (tavg) as Hue')
+        plt.xticks(rotation=45)
+        plt.legend(title='Temperature (tavg)', loc="upper left")
+        st.pyplot()
+
+
+
+    st.title(f'{selected_file_name} Map:')
 
     map_dir = 'maps/'
 
-    map_files = [f for f in os.listdir(map_dir) if f.startswith(selected_file) and f.endswith('.html')]
+    map_files = [f for f in os.listdir(map_dir) if f.startswith(selected_file_name) and f.endswith('.html')]
 
     if map_files:
         selected_map = map_files[0]
@@ -170,7 +194,6 @@ def main():
             map_html = f.read()
 
         st.components.v1.html(map_html, width=800, height=400)
-
 
 if __name__ == '__main__':
     main()
