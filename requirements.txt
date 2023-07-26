@@ -6,3 +6,5 @@ polyline==2.0.0
 folium==0.14.0
 meteostat==1.6.5
 streamlit==1.25.0
+seaborn
+ydata-profiling==4.3.2
