@@ -1,14 +1,9 @@
 import streamlit as st
-from streamlit.components.v1 import html
-
-def load_markdown_file(file_path):
-    with open(file_path, 'r') as file:
-        content = file.read()
-    return content
+from Home import *
 
 def main():
 
-    st.title('About')
+    # set_page_config()
 
     about_content = load_markdown_file('streamlit/pages/md/About.md')
 

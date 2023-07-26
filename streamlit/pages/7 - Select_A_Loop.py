@@ -2,11 +2,14 @@ import streamlit as st
 import pandas as pd
 import os
 import numpy as np
+from Home import *
 
+@st.cache_data
 def load_data(file_path):
     df = pd.read_csv(file_path)
     return df
 
+@st.cache_data
 def reorder_columns(df):
     column_order = ['start_date',
                     'name',
@@ -106,7 +109,7 @@ def main():
     data_dir = 'csv/run/rrgcc'
 
     csv_files = [f for f in os.listdir(data_dir) if f.endswith('.csv')]
-    selected_file = st.selectbox('Select Run(s):', csv_files, index=0)
+    selected_file = st.selectbox('Select Loop(s):', csv_files, index=0)
 
     selected_run_name = None
 

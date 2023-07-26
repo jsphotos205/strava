@@ -1,9 +1,9 @@
 # Retrieve and decode Google Polyline for mapping and weather location information
 
-* [Google Polyline Docs](https://developers.google.com/maps/documentation/utilities/polylineutility "Google Polyline Docs")
-* [Polyline Module Docs](https://pypi.org/project/polyline/ "Polyline Module Docs")
+* [Google Polyline Documentation](https://developers.google.com/maps/documentation/utilities/polylineutility "Google Polyline Docs")
+* [Polyline Python Library Documentation](https://pypi.org/project/polyline/ "Polyline Module Docs")
 
-When Google Polyline is decoded it outputs longitude and latitude listings for activity. With this information we can then assign a weather station based on the acquired longitude and latitude of the run activity to use in the weather API.
+When Google Polyline is decoded it outputs longitude and latitude listings for activity. With this information we can then assign a weather station based on the acquired longitude and latitude of the run activity to use for weather data.
 
 ```python
 # Create a new DataFrame 'all_run_map_data' form the 'map' column in 'run_data' for polyline data
