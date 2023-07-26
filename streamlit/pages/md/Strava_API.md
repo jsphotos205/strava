@@ -1,6 +1,8 @@
 # Strava API
 
-Following is a walkthrough of acquring and working with the Strava API
+Following is a walkthrough of acquring and working with the Strava API.
+
+The original file can be found on [GitHub](https://github.com/jsphotos205/strava "GitHub link") as a Jupyter Noterbook under the name [strava_api.ipynb](https://github.com/jsphotos205/strava/blob/main/strava_api.ipynb "strava_api.ipynb link")
 
 ## Strava account information:
 

@@ -6,6 +6,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from Home import *
 
+st.set_option('deprecation.showPyplotGlobalUse', False)
+
 @st.cache_data
 def load_data(file_path):
     df = pd.read_csv(file_path)
@@ -105,6 +107,28 @@ def highlight_min_values(val, df):
 
     return f' {min_minutes_style}; {min_distance_style}; {min_speed_style}; {min_avg_speed_style}; {min_elevation_gain_style}; {min_elevation_style}; {min_elevation_low_style}; {min_pr_count_style}; {min_tavg_style}; {min_tmax_style}; {min_tmin_style}; {min_prcp_style}; {min_wspd_style}; {min_pres_style}'
 
+def create_temperature_graphs(df):
+    fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+    fig.suptitle('Temperature vs. Running Performance')
+
+    sns.scatterplot(ax=axes[0, 0], data=df, x='tavg', y='moving_time_minutes')
+    axes[0, 0].set_xlabel('Average Temperature (°F)')
+    axes[0, 0].set_ylabel('Moving Time (minutes)')
+
+    sns.scatterplot(ax=axes[0, 1], data=df, x='tavg', y='average_speed')
+    axes[0, 1].set_xlabel('Average Temperature (°F)')
+    axes[0, 1].set_ylabel('Average Speed (mph)')
+
+    sns.scatterplot(ax=axes[1, 0], data=df, x='tavg', y='max_speed')
+    axes[1, 0].set_xlabel('Average Temperature (°F)')
+    axes[1, 0].set_ylabel('Max Speed (mph)')
+
+    sns.scatterplot(ax=axes[1, 1], data=df, x='tavg', y='total_elevation_gain')
+    axes[1, 1].set_xlabel('Average Temperature (°F)')
+    axes[1, 1].set_ylabel('Total Elevation Gain (feet)')
+
+    plt.tight_layout()
+    st.pyplot(fig)
 
 def main():
     st.set_page_config(page_title='RRGCC Running and Weather Data',
@@ -160,25 +184,19 @@ def main():
         st.dataframe(run_data_min)
         st.caption(f'Min values of {selected_file_name} highlighted in blue')
 
-        st.title(f'{selected_file_name} Graph:')
+        st.title(f'{selected_file_name} Graphs:')
 
         fig, ax = plt.subplots()
-        ax.scatter(x='distance_miles', y='moving_time_minutes', hue='tavg', data=run_data)
+        sns.set_style(style='darkgrid')
+        ax = sns.histplot(data=run_data,
+                          x='distance_miles',
+                          binwidth=.5)
         plt.xlabel('Distance (miles)')
-        plt.ylabel('Moving Time (minutes)')
-        plt.title('Scatter Plot : Distance vs. Moving Time')
-        plt.legend(title='Temperature (tavg)')
-        st.pyplot()
+        plt.ylabel('Number of Runs')
+        plt.title(f'Mile Concentration of {selected_file_name} Run Data')
+        st.pyplot(fig)
 
-        sns.barplot(x='start_date', y='distance_miles', hue='tavg', data=run_data)
-        plt.xlabel('Time')
-        plt.ylabel('Distance (miles)')
-        plt.title('Line Chart : Distance vs Time with Temperature (tavg) as Hue')
-        plt.xticks(rotation=45)
-        plt.legend(title='Temperature (tavg)', loc="upper left")
-        st.pyplot()
-
-
+        create_temperature_graphs(run_data)
 
     st.title(f'{selected_file_name} Map:')
 

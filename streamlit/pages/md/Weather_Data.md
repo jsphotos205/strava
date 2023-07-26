@@ -1,4 +1,6 @@
-# Acquiring Weather Data
+# Weather Data
+
+Continuing working with the [strava_api.ipynb](https://github.com/jsphotos205/strava/blob/main/strava_api.ipynb "strava_api.ipynb link") we will use latitude and longitude information collected from the run data to determine location for weather data.
 
 We will be accessing historic weather data via weather stations in closest proximity to RRGCC land using the Meteostat python library. Meteostat is an excellent python library which gives developers a simple interface for historic weather data. With many failed attempts to access weather data via [NOAA](https://www.weather.gov/documentation/services-web-api "NOAA's API Documentation")'s API I have found Meteostat to be an easier and more user friendly option.
 

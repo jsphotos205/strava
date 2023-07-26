@@ -1,4 +1,6 @@
-# Retrieve and decode Google Polyline for mapping and weather location information
+# Google Polyline
+
+Continuing in the [strava_api.ipynb](https://github.com/jsphotos205/strava/blob/main/strava_api.ipynb "strava_api.ipynb link") we aim to retrieve and decode Google Polyline for mapping and weather location information.
 
 * [Google Polyline Documentation](https://developers.google.com/maps/documentation/utilities/polylineutility "Google Polyline Docs")
 * [Polyline Python Library Documentation](https://pypi.org/project/polyline/ "Polyline Module Docs")

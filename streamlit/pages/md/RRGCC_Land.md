@@ -1,6 +1,6 @@
 # RRGCC Running Data
 
-Going further into the Strava run_data to only collect runs from RRGCC land
+After merging the weather data and run data earlier in the [strava_api.ipynb](https://github.com/jsphotos205/strava/blob/main/strava_api.ipynb "strava_api.ipynb link") we aim to go further into the Strava run_data to only collect runs from RRGCC land.
 
 * For this particular project I want to focus on RRGCC owned and operated land
   * Most common local running location for my runs
@@ -60,3 +60,7 @@ only_drive_by_loop.to_csv(only_drive_by_path, index=False)
 
 weather_data.to_csv(weather_data_csv_path, index=True)
 ```
+
+Now that the data is processed and saved as a .csv file it is easily explored and accessed via a Streamlit app.
+
+You can explore the Streamlit app code [here](https://github.com/jsphotos205/strava/tree/main/streamlit "streamlit code in Github")

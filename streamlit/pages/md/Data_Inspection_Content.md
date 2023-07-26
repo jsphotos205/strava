@@ -1,17 +1,17 @@
-# Inspecting and Cleaning Activities Data
+# Inspecting and Cleaning the Data
 
-### Following is the source code I used for digging further into the data that was collected from the Strava API.
+Continuing in the [strava_api.ipynb](https://github.com/jsphotos205/strava/blob/main/strava_api.ipynb "strava_api.ipynb link") we start to inspect and clean the acquired data from the Strava API.
 
-Looking to where the data could be cleaned:
+## Looking to where the data can be cleaned:
 
-* Columns that void of information due to no use of heart monitor or watch that tracks health data as such.
+* Columns that are void of information due to no use of heart monitor or watch that tracks health data as such.
   * Could have further development if data was present.
 * Personally not interested in the social-networking side of Strava
   * i.e. photos, kudos, etc.
 * Noticed that column values 'location_city' and 'location_stat' actually contained no location information.
   * Location information can be acquired via Google Polyline information which is found in the 'map' column
     * [Google Polyline](https://developers.google.com/maps/documentation/utilities/polylineutility "Google Polyline Developers Page")
-    * Explained further on the next page.
+      * Explained further on the next page.
 
 ```python
 all_strava_activites.head()
