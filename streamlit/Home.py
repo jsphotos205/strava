@@ -12,20 +12,16 @@ def load_markdown_file(file_path):
         content = file.read()
     return content
 
-def set_page_config(page_title, page_icon):
-    return ('RRGCC Running and Weather', ':runner:')
-
 def main():
 
-    set_page_config(page_title=True, page_icon=True)
-
+    st.set_page_config(page_title='RRGCC Running and Weather Data',
+                       page_icon= ':runner:')
+    
     header_path = 'images/rrgcc.png'
     st.image(header_path, use_column_width=True, width=100)
 
     centered_header('Running and Weather Data Analysis')
     centered_subheader('on RRGCC operated land')
-
-    st.sidebar.success('Select a demo above.')
 
     home_content = load_markdown_file('streamlit/pages/md/Home.md')
     st.markdown(home_content, unsafe_allow_html=True)

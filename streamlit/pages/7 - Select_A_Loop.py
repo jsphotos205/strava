@@ -105,6 +105,9 @@ def highlight_min_values(val, df):
 
 
 def main():
+    
+    st.set_page_config(page_title='RRGCC Running and Weather Data',
+                       page_icon= ':runner:')
 
     data_dir = 'csv/run/rrgcc'
 

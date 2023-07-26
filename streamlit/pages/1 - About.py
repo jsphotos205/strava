@@ -2,8 +2,8 @@ import streamlit as st
 from Home import *
 
 def main():
-
-    # set_page_config()
+    st.set_page_config(page_title='RRGCC Running and Weather Data : About',
+                       page_icon= ':runner:')
 
     about_content = load_markdown_file('streamlit/pages/md/About.md')
 

@@ -3,6 +3,10 @@ from Home import *
 
 def main():
 
+    st.set_page_config(page_title='RRGCC Running and Weather Data',
+                       page_icon= ':runner:')
+
+
     google_polyline_content = load_markdown_file('streamlit/pages/md/Google_Polyline.md')
 
     st.markdown(google_polyline_content, unsafe_allow_html=True)

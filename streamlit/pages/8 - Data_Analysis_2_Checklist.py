@@ -7,7 +7,16 @@ import streamlit as st
 from Home import *
 
 def main():
-
+      st.set_page_config(page_title='RRGCC Running and Weather Data',
+                         page_icon= ':runner:')
+      
+      header_path = 'images/rrgcc.png'
+      
+      st.image(header_path, use_column_width=True, width=100)
+      
+      centered_header('Running and Weather Data Analysis')
+      centered_subheader('on RRGCC operated land')
+      
       centered_header('Data Analysis 2 Project Requirement Checklist :')
       st.checkbox('Project plan for final project')
       st.checkbox('The project is uploaded to your GitHub repository and shows at minimum 5 separate commits')
