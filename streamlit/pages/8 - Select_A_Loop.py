@@ -8,12 +8,12 @@ from Home import *
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-@st.cache_data
+# @st.cache_data
 def load_data(file_path):
     df = pd.read_csv(file_path)
     return df
 
-@st.cache_data
+# @st.cache_data
 def reorder_columns(df):
     column_order = ['start_date',
                     'name',

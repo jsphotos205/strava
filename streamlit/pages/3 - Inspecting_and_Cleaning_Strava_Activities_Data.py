@@ -2,7 +2,7 @@ import streamlit as st
 from Home import *
 
 def main():
-
+    
     page_config = Page_Config()
     page_config.set_page_config()
 
