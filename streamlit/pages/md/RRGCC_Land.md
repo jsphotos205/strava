@@ -25,6 +25,7 @@ all_drive_by = run_data[run_data['name'].str.contains('Drive By Loop', case=Fals
 only_lode_loop = run_data[run_data['name'].str.contains(r'^PMRP : Lode Loop$', case=False)]
 only_sore_heel_loop = run_data[run_data['name'].str.contains(r'^PMRP : Sore Heel Loop$', case=False)]
 only_drive_by_loop = run_data[run_data['name'].str.contains(r'^PMRP : Drive By Loop$', case=False)]
+only_arena_loop = run_data[run_data['name'].str.contains(r'^PMRP : Arena Loop$', case=False)]
 ```
 
 **Set csv path and save csv files :**
@@ -45,6 +46,7 @@ all_drive_by_path = f'{rrgcc_path}all_drive_by.csv'
 only_sore_heel_path = f'{rrgcc_path}only_sore_heel.csv'
 only_lode_path = f'{rrgcc_path}only_lode.csv'
 only_drive_by_path = f'{rrgcc_path}only_drive_by.csv'
+only_arena_path = f'{rrgcc_path}only_arena.csv'
 
 weather_data_csv_path = 'csv/weather/only_weather_data.csv'
 
@@ -57,10 +59,9 @@ all_lode_loop.to_csv(all_lode_path, index=False)
 only_lode_loop.to_csv(only_lode_path, index=False)
 all_drive_by.to_csv(all_drive_by_path, index=False)
 only_drive_by_loop.to_csv(only_drive_by_path, index=False)
+only_arena_loop.to_csv(only_arena_path, index=False)
 
 weather_data.to_csv(weather_data_csv_path, index=True)
 ```
 
-Now that the data is processed and saved as a .csv file it is easily explored and accessed via a Streamlit app.
-
-You can explore the Streamlit app code [here](https://github.com/jsphotos205/strava/tree/main/streamlit "streamlit code in Github")
+Now that the data is processed, next we will explore the capabilites of using Google Polyline information to create folium Maps to be later used in the Streamlit app for more interactive exploration of the data.

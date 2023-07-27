@@ -34,16 +34,34 @@ import urllib3
 import secrets
 import pandas as pd
 import polyline
-import folium
-from ast import literal_eval
 from datetime import datetime
 from meteostat import Stations, Daily
 ```
+
+I am not really sure why you have to have this in the code but found this as a workaround for operating with the Strava API.
 
 ```python
 # Disable insecure request warnings from urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 ```
+
+## Make call to Strava API
+
+An example of how the `secrets.py` file that holds the strava_payload and weather token information is as follows :
+
+```python
+strava_payload = {
+    'client_id' : '102332',
+    'client_secret' : '1e57r15k89kldk3657g9e253136gdj23d3nu75r5gh',
+    'refresh_token' : 'gg5g73gs46828t56768af3e82e3e1d454c716a73',
+    'grant_type' : 'refresh_token',
+    'f' : 'json'
+}
+
+weather_token = 'FGiRfkFGHsRLDdypTFSqLzaXrbCfFFsyQ'
+```
+
+First we need to make a request to the Strava API for the activities information of the user. At the end of this api call we have a json file that contains all the users activities.
 
 ```python
 auth_url = 'https://www.strava.com/oauth/token'
