@@ -2,31 +2,13 @@ import streamlit as st
 import pandas as pd
 import os
 
-@st.cache_data
-def load_data(file_path):
-    df = pd.read_csv(file_path)
+class Page_Config:
 
-@st.cache_data
-def reorder_columns(df):
-    column_order = ['start_date',
-                    'name',
-                    'moving_time_minutes',
-                    'distance_miles',
-                    'average_speed',
-                    'max_speed',
-                    'total_elevation_gain',
-                    'elev_high',
-                    'elev_low',
-                    'pr_count',
-                    'tavg',
-                    'tmax',
-                    'tmin',
-                    'prcp',
-                    # 'snow',
-                    # 'wdir',
-                    'wspd',
-                    'pres']
-    return df[column_order]
+    def set_page_config(self):
+        st.set_page_config(page_title='RRGCC Running and Weather Data',
+                           page_icon=':runner:',
+                           layout='wide',
+                           initial_sidebar_state='expanded')
 
 def centered_header(text):
     st.markdown(f"<h1 style='text_align: center;'>{text}</h1>", unsafe_allow_html=True)
@@ -39,19 +21,6 @@ def load_markdown_file(file_path):
     with open(file_path, 'r') as file:
         content = file.read()
     return content
-
-
-class Page_Config:
-    page_title = 'RRGCC Running and Weather Data'
-    page_icon = ':runner'
-    layout = 'wide'
-    initial_sidebar_state = 'expanded'
-
-    def set_page_config(self):
-        st.set_page_config(page_title=self.page_title,
-                           page_icon=self.page_icon,
-                           layout=self.layout,
-                           initial_sidebar_state=self.initial_sidebar_state)
 
 def main():
 

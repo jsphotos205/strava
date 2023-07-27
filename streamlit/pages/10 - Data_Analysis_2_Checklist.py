@@ -1,5 +1,7 @@
 import streamlit as st
-from Home import *
+from Home import Page_Config
+from Home import centered_header
+from Home import centered_subheader
 
 def main():
 

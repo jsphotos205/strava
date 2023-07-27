@@ -2,17 +2,17 @@ import pandas as pd
 import ydata_profiling as yprof
 import streamlit as st
 import os
-from Home import *
+from Home import Page_Config
 
 
 from streamlit_pandas_profiling import st_profile_report
 
-@st.cache_data
+
 def load_data(file_path):
     df = pd.read_csv(file_path)
     return df
 
-@st.cache_data
+
 def reorder_columns(df):
     column_order = ['start_date',
                     'name',
@@ -49,7 +49,6 @@ def main():
 
     if selected_file != 'Default':
 
-        # @st.cache_data(experimental_allow_widgets=True)
         def pandas_report():
             file_path = os.path.join(data_dir, selected_file)
             selected_file_name = selected_file.rstrip('.csv')
@@ -63,7 +62,7 @@ def main():
                 return(profile)
             else:
                 st.write('Error : Failed to load data from the csv file')
-    pandas_report()
+        pandas_report()
 
 if __name__ == '__main__':
     main()

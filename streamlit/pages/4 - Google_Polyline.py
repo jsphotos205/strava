@@ -1,5 +1,6 @@
 import streamlit as st
-from Home import *
+from Home import Page_Config
+from Home import load_markdown_file
 
 def main():
 

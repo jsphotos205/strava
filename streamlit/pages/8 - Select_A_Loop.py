@@ -4,9 +4,39 @@ import os
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-from Home import *
+from Home import Page_Config
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
+
+class Temp_Graphs:
+
+    def create_temperature_graphs(self, df):
+        if len(df) > 1:
+            fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+            fig.suptitle('Temperature vs. Running Performance')
+
+            sns.scatterplot(ax=axes[0, 0], data=df, x='tavg', y='moving_time_minutes')
+            axes[0, 0].set_xlabel('Average Temperature (°F)')
+            axes[0, 0].set_ylabel('Moving Time (minutes)')
+
+            sns.scatterplot(ax=axes[0, 1], data=df, x='tavg', y='average_speed')
+            axes[0, 1].set_xlabel('Average Temperature (°F)')
+            axes[0, 1].set_ylabel('Average Speed (mph)')
+
+            sns.scatterplot(ax=axes[1, 0], data=df, x='tavg', y='max_speed')
+            axes[1, 0].set_xlabel('Average Temperature (°F)')
+            axes[1, 0].set_ylabel('Max Speed (mph)')
+
+            sns.scatterplot(ax=axes[1, 1], data=df, x='tavg', y='total_elevation_gain')
+            axes[1, 1].set_xlabel('Average Temperature (°F)')
+            axes[1, 1].set_ylabel('Total Elevation Gain (feet)')
+
+            plt.tight_layout()
+            st.pyplot(fig)
+        elif len(df) == 1:
+            st.write('Only one entry for loop, cannot create temperature comparison graph for loop.')
+        else:
+            st.write('No run data.')
 
 # @st.cache_data
 def load_data(file_path):
@@ -107,61 +137,6 @@ def highlight_min_values(val, df):
 
     return f' {min_minutes_style}; {min_distance_style}; {min_speed_style}; {min_avg_speed_style}; {min_elevation_gain_style}; {min_elevation_style}; {min_elevation_low_style}; {min_pr_count_style}; {min_tavg_style}; {min_tmax_style}; {min_tmin_style}; {min_prcp_style}; {min_wspd_style}; {min_pres_style}'
 
-class Temp_Graphs:
-
-    def create_temperature_graphs(self, df):
-        if len(df) > 1:
-            fig, axes = plt.subplots(2, 2, figsize=(12, 10))
-            fig.suptitle('Temperature vs. Running Performance')
-
-            sns.scatterplot(ax=axes[0, 0], data=df, x='tavg', y='moving_time_minutes')
-            axes[0, 0].set_xlabel('Average Temperature (°F)')
-            axes[0, 0].set_ylabel('Moving Time (minutes)')
-
-            sns.scatterplot(ax=axes[0, 1], data=df, x='tavg', y='average_speed')
-            axes[0, 1].set_xlabel('Average Temperature (°F)')
-            axes[0, 1].set_ylabel('Average Speed (mph)')
-
-            sns.scatterplot(ax=axes[1, 0], data=df, x='tavg', y='max_speed')
-            axes[1, 0].set_xlabel('Average Temperature (°F)')
-            axes[1, 0].set_ylabel('Max Speed (mph)')
-
-            sns.scatterplot(ax=axes[1, 1], data=df, x='tavg', y='total_elevation_gain')
-            axes[1, 1].set_xlabel('Average Temperature (°F)')
-            axes[1, 1].set_ylabel('Total Elevation Gain (feet)')
-
-            plt.tight_layout()
-            st.pyplot(fig)
-        elif len(df) == 1:
-            st.write('Only one entry for loop, cannot create temperature comparison graph for loop.')
-        else:
-            st.write('No run data.')
-
-
-
-# def create_temperature_graphs(df):
-#     fig, axes = plt.subplots(2, 2, figsize=(12, 10))
-#     fig.suptitle('Temperature vs. Running Performance')
-
-#     sns.scatterplot(ax=axes[0, 0], data=df, x='tavg', y='moving_time_minutes')
-    # axes[0, 0].set_xlabel('Average Temperature (°F)')
-    # axes[0, 0].set_ylabel('Moving Time (minutes)')
-
-    # sns.scatterplot(ax=axes[0, 1], data=df, x='tavg', y='average_speed')
-    # axes[0, 1].set_xlabel('Average Temperature (°F)')
-    # axes[0, 1].set_ylabel('Average Speed (mph)')
-
-    # sns.scatterplot(ax=axes[1, 0], data=df, x='tavg', y='max_speed')
-    # axes[1, 0].set_xlabel('Average Temperature (°F)')
-    # axes[1, 0].set_ylabel('Max Speed (mph)')
-
-    # sns.scatterplot(ax=axes[1, 1], data=df, x='tavg', y='total_elevation_gain')
-    # axes[1, 1].set_xlabel('Average Temperature (°F)')
-    # axes[1, 1].set_ylabel('Total Elevation Gain (feet)')
-
-    # plt.tight_layout()
-    # st.pyplot(fig)
-
 def main():
     
     page_config = Page_Config()
@@ -232,7 +207,6 @@ def main():
 
         temp_graphs = Temp_Graphs()
         temp_graphs.create_temperature_graphs(run_data)
-        # create_temperature_graphs(run_data)
 
     st.title(f'{selected_file_name} Map:')
 
