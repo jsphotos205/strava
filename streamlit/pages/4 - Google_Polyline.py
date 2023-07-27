@@ -2,11 +2,9 @@ import streamlit as st
 from Home import *
 
 def main():
-    st.set_page_config(page_title='RRGCC Running and Weather Data',
-                       page_icon= ':runner:',
-                       layout='wide',
-                       initial_sidebar_state='expanded')
 
+    page_config = Page_Config()
+    page_config.set_page_config()
 
     google_polyline_content = load_markdown_file('streamlit/pages/md/Google_Polyline.md')
 

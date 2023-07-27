@@ -35,10 +35,9 @@ def reorder_columns(df):
     return df[column_order]
 
 def main():
-    st.set_page_config(page_title='RRGCC Running and Weather Data',
-                       page_icon= ':runner:',
-                       layout='wide',
-                       initial_sidebar_state='expanded')
+    
+    page_config = Page_Config()
+    page_config.set_page_config()
     
     st.title('Summary Report:')
     
@@ -50,17 +49,21 @@ def main():
 
     if selected_file != 'Default':
 
-        file_path = os.path.join(data_dir, selected_file)
-        selected_file_name = selected_file.rstrip('.csv')
-        run_data = load_data(file_path)
-        run_data = reorder_columns(df=run_data)
+        # @st.cache_data(experimental_allow_widgets=True)
+        def pandas_report():
+            file_path = os.path.join(data_dir, selected_file)
+            selected_file_name = selected_file.rstrip('.csv')
+            run_data = load_data(file_path)
+            run_data = reorder_columns(df=run_data)
 
-        if run_data is not None:
-            profile = yprof.ProfileReport(run_data)
-            st.title(f'Summary Report for {selected_file_name}')
-            st_profile_report(profile)
-        else:
-            st.write('Error : Failed to load data from the csv file')
+            if run_data is not None:
+                profile = yprof.ProfileReport(run_data)
+                st.title(f'{selected_file_name} Report :')
+                profile = st_profile_report(profile)
+                return(profile)
+            else:
+                st.write('Error : Failed to load data from the csv file')
+    pandas_report()
 
 if __name__ == '__main__':
     main()

@@ -10,6 +10,7 @@ all_sore_heel = pd.read_csv('csv/run/rrgcc/all_sore_heel.csv')
 only_sore_heel = pd.read_csv('csv/run/rrgcc/only_sore_heel.csv')
 all_drive_by = pd.read_csv('csv/run/rrgcc/all_drive_by.csv')
 only_drive_by = pd.read_csv('csv/run/rrgcc/only_drive_by.csv')
+only_arena_loop = pd.read_csv('csv/run/rrgcc/only_arena.csv')
 
 def PMRP_Map(df, map_name):
 
@@ -57,3 +58,4 @@ PMRP_Map(all_sore_heel, 'all_sore_heel')
 PMRP_Map(only_sore_heel, 'only_sore_heel')
 PMRP_Map(all_drive_by, 'all_drive_by')
 PMRP_Map(only_drive_by, 'only_drive_by')
+PMRP_Map(only_arena_loop, 'only_arena')

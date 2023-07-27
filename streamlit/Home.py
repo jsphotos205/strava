@@ -40,11 +40,23 @@ def load_markdown_file(file_path):
         content = file.read()
     return content
 
+
+class Page_Config:
+    page_title = 'RRGCC Running and Weather Data'
+    page_icon = ':runner'
+    layout = 'wide'
+    initial_sidebar_state = 'expanded'
+
+    def set_page_config(self):
+        st.set_page_config(page_title=self.page_title,
+                           page_icon=self.page_icon,
+                           layout=self.layout,
+                           initial_sidebar_state=self.initial_sidebar_state)
+
 def main():
-    st.set_page_config(page_title='RRGCC Running and Weather Data',
-                       page_icon= ':runner:',
-                       layout='wide',
-                       initial_sidebar_state='expanded')
+
+    page_config = Page_Config()
+    page_config.set_page_config()
     
     header_path = 'images/rrgcc.png'
     st.image(header_path, use_column_width=True, width=100)
